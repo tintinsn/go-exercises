@@ -47,6 +47,15 @@ func ReverseNum(num int) {
 	}
 }
 
+// Exercise 6: Squared Number from 1 to n
+func squaredNum(num int) {
+	for i:=1; i<= num; i++ {
+		square := i* i
+		fmt.Printf("%d ^ 2 = %d\n",i,square)
+	}
+}
+
+
 func main() {
-	ReverseNum(12)
+	squaredNum(12)
 }
