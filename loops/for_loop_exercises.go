@@ -5,11 +5,11 @@ import "fmt"
 // * Beginner
 
 // Exercise 1: Print numbers
-// func printNumber(num int) {
-// 	for i:=1; i<= num; i++ {
-// 		fmt.Println(i)
-// 	}
-// }
+func printNumber(num int) {
+	for i:=1; i<= num; i++ {
+		fmt.Println(i)
+	}
+}
 
 // Exercise 2: Print Even number
 func evenNumber(num int) {
@@ -20,8 +20,15 @@ func evenNumber(num int) {
 	} 
 }
 
-
+// Exercise 3: Sum Of Number from 1 to n
+func sumOfNumber(num int) {
+	sum := 0
+	for i:=1; i<= num; i++ {
+		sum += i
+	}
+	fmt.Printf("Sum of 1 to %d = %d",num, sum)
+}
 
 func main() {
-	evenNumber(15)
+	sumOfNumber(100)
 }
