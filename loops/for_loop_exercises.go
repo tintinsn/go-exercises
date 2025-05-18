@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// * Beginner
+// * Easy
 
 // Exercise 1: Print numbers
 func printNumber(num int) {
