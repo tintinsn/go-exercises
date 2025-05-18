@@ -55,7 +55,35 @@ func squaredNum(num int) {
 	}
 }
 
+// Exercise 7: Prime Number from 2 to n
+/* 
+ * condition of prime number:
+ - divisivle by 1 and itself
+ - 1 it not prime number
+
+ * Approach:
+ - loop through number from 2 to n.
+ - for each number, assume it's prime number until proven otherwise.
+ - check if number is divisible by any number from 2 to n - 1.
+ 	- If divisivle, it not a prime number -> break
+ 	- If not divisible by any number -> it's a prime number ->  print the number.
+*/
+func primeNumbers(num int) {
+	for i:=2; i<= num; i++ { 
+		isPrime := true 
+		for j:=2; j<i; j++ {
+			if i % j == 0 {
+				isPrime = false
+				break
+			}
+		}
+		if isPrime {
+			fmt.Println(i)
+		}
+	}
+}
+
 
 func main() {
-	squaredNum(12)
+	primeNumbers(1)
 }
