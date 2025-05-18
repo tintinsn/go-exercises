@@ -83,7 +83,54 @@ func primeNumbers(num int) {
 	}
 }
 
+// Exercise 8: Star Pyramid
+
+/* 
+ Ex. n = 5
+ row number(i)		spaces(j)		stars(k)
+ i = 1 				4				1
+ i = 2 				3  				3
+ i = 3 				2  				5
+ i = 4 				1  				7
+ i = 5   			0				9
+
+ - Spaces = n - i
+ - Stars =  (2 * i) - 1
+ 
+ * condition:
+ 	- number of pyramid row equals the input values
+ 	- each row start with spaces with n - i for align star to center 
+ 	- each row contains (2*i - 1) star
+
+ * Approach:
+	- Use 3 nested loops:
+		1. outer loop: control the number of row from 1 to n
+		2. first inner loop: print (n-1) spaces without a newline.
+		3. second inner loop: print (2*i - 1) star without a newline.
+	- after print each row use Println() to newline.
+
+*/
+
+
+func starPyramid(n int) {
+	// number of row
+	for i:=1; i<= n; i++ { 
+		// print spaces
+	 	for j:=1; j<= n-i; j++ {  
+		fmt.Print(" ")
+		}
+
+		// print star
+		for k:=1; k<= (2*i) -1; k++ {
+		fmt.Print("*")
+		}
+		
+		// new line
+	 	fmt.Println()
+	}
+}
+
 
 func main() {
-	primeNumbers(1)
+	starPyramid(5)
 }
