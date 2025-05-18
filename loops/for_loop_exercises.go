@@ -40,6 +40,13 @@ func MultiplicationTableOfN(num int) {
 	}
 }
 
+// Exercise 5: Reverse Number
+func ReverseNum(num int) {
+	for i:=num; i>=1; i-- {
+		fmt.Println(i)
+	}
+}
+
 func main() {
-	MultiplicationTableOfN(12)
+	ReverseNum(12)
 }
