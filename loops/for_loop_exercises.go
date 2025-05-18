@@ -29,6 +29,17 @@ func sumOfNumber(num int) {
 	fmt.Printf("Sum of 1 to %d = %d",num, sum)
 }
 
+// * Intermediate
+
+// Exercise 4: Print Multiplication Table Of N
+func MultiplicationTableOfN(num int) {
+	
+	for i:=1; i<=12; i++ {
+		fmt.Printf("%d x %d = %d\n",num,i, i*num)
+	
+	}
+}
+
 func main() {
-	sumOfNumber(100)
+	MultiplicationTableOfN(12)
 }
