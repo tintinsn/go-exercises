@@ -32,7 +32,7 @@ func sumOfNumber(num int) {
 // * Intermediate
 
 // Exercise 4: Print Multiplication Table Of N
-func MultiplicationTableOfN(num int) {
+func multiplicationTableOfN(num int) {
 	
 	for i:=1; i<=12; i++ {
 		fmt.Printf("%d x %d = %d\n",num,i, i*num)
@@ -41,7 +41,7 @@ func MultiplicationTableOfN(num int) {
 }
 
 // Exercise 5: Reverse Number
-func ReverseNum(num int) {
+func reverseNum(num int) {
 	for i:=num; i>=1; i-- {
 		fmt.Println(i)
 	}
