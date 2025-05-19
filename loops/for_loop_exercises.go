@@ -124,13 +124,47 @@ func starPyramid(n int) {
 		for k:=1; k<= (2*i) -1; k++ {
 		fmt.Print("*")
 		}
-		
+
 		// new line
 	 	fmt.Println()
 	}
 }
 
+// Exercise 8: FibonacciSequence
+
+/* 
+ What is Fibonacci?
+	- each number is the sum of two previous number.
+	- Example. 0, 1, 1, 2, 3, 5, 8, 13, ...
+
+ * condition:
+	- first and second number are 0, 1
+	- Every number is sum of previous two number.
+	- How many times should this loop run? --> n - 2 because the first two number are already printed.
+
+ * Approach:
+	- Initialize two variables a = 0, b = 1.
+	- Print the first two numbers.
+	- Use a loop to run  (n-2) times:
+		- Calculate the next number by --> next = a+b
+		- Update values -> a = b, b = next
+		- Print  the next number.
+*/
+
+func fibonacciSequence(n int) {
+	a := 0
+	b := 1
+
+	fmt.Print(a,b, " ")
+	for i:=3; i<= n; i++ {
+		next := a+b
+		a = b
+		b = next
+		fmt.Print(next, " " )
+	}
+}
+
 
 func main() {
-	starPyramid(5)
+	fibonacciSequence(8)
 }
