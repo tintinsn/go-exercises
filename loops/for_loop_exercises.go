@@ -130,7 +130,7 @@ func starPyramid(n int) {
 	}
 }
 
-// Exercise 8: FibonacciSequence
+// Exercise 9: FibonacciSequence
 
 /* 
  What is Fibonacci?
