@@ -70,7 +70,7 @@ use a for loop to print the balance at the end of each year.
     - What the data type of input?
  		- slice
 	- Are the inputs expected to be positive numbers onl?
- 		- no, the input is list of slice that contain positive and negative number.
+ 		- no, the input is a list of slice that contain positive and negative number.
 	- Are there any minimum or maximum limit?
  		- no.
 	- Do the inputs need to be validated or converted before us?
@@ -210,11 +210,163 @@ func expenseFilterSum(trans []float64) {
 	}
 }
 
+ //? Ex 3: Bank Statement with Balance
+
+/*
+ * Problem Statement:
+ - Given a list of transactions (each with a description and amount), 
+ - print a full bank statement showing the transaction and running balance.
+
+ * Example
+ Input: 
 
 
+	transactions := []Transaction {
+		{"Deposit", 1000},
+		{"Withdraw", -300},
+		{"Transfer", -200},
+	}
+ Expected Output: 
+		Deposit: 1000.00 | Balance: 1000.00  
+		Withdraw: -300.00 | Balance: 700.00  
+		Transfer: -200.00 | Balance: 500.00  
+
+ * Condition:
+ - Input:
+   - How many inputs are required?
+		- A single input: a list of transactions.
+   - What is the data type of each input?
+		- transactions is a slice of Transaction structs, so type is []Transacrion
+		- []Transaction contains 2 fields
+			1. Description field type string
+			2. Amount field type float64
+			3. type Transaction struct {
+				Description string
+				Amount      float64
+				}
+   - Are the inputs expected to be positive numbers only?
+		- no, the inputs expected to be a slice of []Transaction
+   - Are there any minimum or maximum limits?
+		- no
+   - Do the inputs need to be validated or converted before use?
+		- no
+
+ - Core Rule:
+   - What exactly does the problem ask us to do?
+		- print statement and the running balance.
+   - Are there any specific rules or formulas?
+		- no,
+   - Should the logic involve loops, conditions, or functions?
+		- use a loop.
+   - Is there any domain-specific behavior?
+		- no
+
+ - Output:
+   - What should be displayed as output?
+		- Deposit: 1000.00 | Balance: 1000.00  
+		Withdraw: -300.00 | Balance: 700.00  
+		Transfer: -200.00 | Balance: 500.00  
+   - Should the output include labels or just values?
+		- include labels
+   - Does the output need to be formatted (e.g., decimal places)?
+		- print the number of amount and balance rounded 2 decimal places
+   - Is the output printed once or repeatedly?
+		- Each line is printed once for each transaction.
+
+ - Edge Cases:
+   - What happens if inputs are zero or negative?
+		- the input is a slice that may contain both negative and positive numbers
+   - What if inputs are missing or invalid?
+		- warnning to user and stop running the program
+   - Should the program handle extremely large or small values?
+		- no
+   - Are there special cases that need custom handling?
+		- no
+
+ * Approach 1:
+  1. check if the transactions list is empty
+		- if empty print a warning and return.
+  2. create and initialize variable call `balance` type float64 to keep track of the running balance.
+  3. loop through each transactions
+		- add the amount to balance
+		- Print description, amount, and current balance in the required format
+
+✅ Result: Passes all test cases
+
+
+ * Manual Test:
+  Test Case 1:
+	Input:
+		transactions := []Transaction{
+		{"Deposit", 1000},
+		{"Withdraw", -300},
+		{"Transfer", -200},
+		}
+
+	Expected Output:
+		Deposit: 1000.00 | Balance: 1000.00  
+		Withdraw: -300.00 | Balance: 700.00  
+		Transfer: -200.00 | Balance: 500.00
+
+
+  Test Case 2:
+	Input:
+		transactions := []Transaction{
+		{"Deposit", 5000},
+		{"Withdraw", -1500},
+		{"Deposit", 2000},
+		{"Withdraw", -1000},
+		}
+
+	Expected Output:
+		Deposit: 5000.00 | Balance: 5000.00  
+		Withdraw: -1500.00 | Balance: 3500.00  
+		Deposit: 2000.00 | Balance: 5500.00  
+		Withdraw: -1000.00 | Balance: 4500.00
+
+
+  Test Case 3:
+	Input:
+		transactions := []Transaction{
+		{"Deposit", 300},
+		{"Withdraw", -100},
+		{"Withdraw", -50},
+		{"Deposit", 250},
+		}
+
+	Expected Output:
+		Deposit: 300.00 | Balance: 300.00  
+		Withdraw: -100.00 | Balance: 200.00  
+		Withdraw: -50.00 | Balance: 150.00  
+		Deposit: 250.00 | Balance: 400.00
+
+*/
+
+type Transaction struct{
+	Description string
+	Amount      float64
+}
+
+func bankStatementBalance(trans []Transaction) {
+	if len(trans) == 0 || trans == nil {
+		fmt.Print("No transactions provided.")
+		return
+	}
+
+	var balance float64
+
+	for _,v := range trans {
+		balance += v.Amount
+		fmt.Printf("%s: %.2f | Balance: %.2f\n",v.Description,v.Amount, balance)
+	}
+}
 
 func main() {
-	transactions := []float64{100, 200, -300, -490}
-	expenseFilterSum(transactions)
-
+	transactions := []Transaction{
+		{"Deposit", 5000},
+		{"Withdraw", -1500},
+		{"Deposit", 2000},
+		{"Withdraw", -1000},
+		}
+	bankStatementBalance(transactions)
 }
