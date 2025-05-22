@@ -546,11 +546,106 @@ func cartDiscountCal(products []Product) {
 	fmt.Printf("Total: %.2f\n", total)
 	}
 
-func main() {
-	products := []Product{
-	{"Shoes", 1200, 10},
-	{"T-Shirt", 500, 0},
-	{"Bag", -1500, 5},
+
+ //? Ex 5: Reward Points Calculator
+/*
+ * Problem Statement:
+ - Every 100 baht spent earns 1 point.
+ - Given a list of purchase amounts, use a for loop to calculate the total reward points earned.
+
+ * Example
+ Input: orders := []float64{250, 600, 120, 380}
+ Expected Output: Total Points: 13
+
+ * Condition:
+ - Input:
+   - How many inputs are required?
+		- single input: list of order
+   - What is the data type of each input?
+		- slice float64
+   - Are the inputs expected to be positive numbers only?
+		- Yes, each values in list of order should have positive values
+   - Are there any minimum or maximum limits?
+		- Yes, values in list should be greater than 0
+   - Do the inputs need to be validated or converted before use?
+		- no.
+
+ - Core Rule:
+   - What exactly does the problem ask us to do?
+		- Calculate and display the total reward points earned.
+   - Are there any specific rules or formulas?
+		- rule of earns reward: 100 bath = 1 point
+   - Should the logic involve loops, conditions, or functions?
+		- Use a loop to iterate over each values in orders
+		- Calculate point by divide values by 100 
+		- Sum the final reward point into the `totalPoints`
+   - Is there any domain-specific behavior?
+		- none
+
+ - Output:
+   - What should be displayed as output?
+		- print the total point 
+   - Should the output include labels or just values?
+		- output must include labels ("Total Point: ")
+   - Does the output need to be formatted (e.g., decimal places)?
+		- Yes, if the output contains decimal, should be rounded down.
+		- the output shoud be display as whole number without any decimal places.
+   - Is the output printed once or repeatedly?
+		- print one line for the total points
+
+ - Edge Cases:
+   - What happens if inputs are zero or negative?
+		- if values in order has a negative values
+			- convert it to 0 before calculation
+   - What if inputs are missing or invalid?
+		- if list of order are empty or nil warning to user and return.
+
+
+ * Approach 1:
+  1. check if the orders is empty or nil, then warning and return
+  2. create and initial variable call totalPoint to sum total point type int
+  3. loop through each order
+		- if values > 100 divided by 100
+		- accumulate by adding the result of values/ 100 into `totalPoint`
+  4. print out the `totalPoint`
+  ✅ Result: Passes all test cases
+
+ * Manual Test:
+  Test Case 1:
+  Input: orders := []float64{99, 49.99, 100}
+  Expected Output: 1
+
+  Test Case 2:
+  Input: orders := []float64{250, 600, 120, 380}
+  Expected Output: 13
+
+  Test Case 3:
+  Input: orders := []float64{199.99, 299.99}
+  Expected Output: 4
+
+  Test Case 5:
+  Input: orders := []float64{500, -100, 0, 300}
+  Expected Output: 8
+
+*/
+
+func rewardCal(orders []float64) {
+	if orders == nil || len(orders) == 0 {
+		fmt.Println("No orders provided.")
+		return
 	}
-	cartDiscountCal(products)
+
+	totalPoint := 0.00
+
+	for _, v := range orders {
+		if v >= 100 {
+			totalPoint += v/100
+		}
+	}
+	fmt.Printf("Total Points: %.0f\n", math.Floor(totalPoint))
+}
+
+func main() {
+	 orders := []float64{250, 600, 120, 380}
+	rewardCal(orders)
 }
