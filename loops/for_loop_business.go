@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 //? Ex 1: Compound Interest Calculator
@@ -361,12 +362,195 @@ func bankStatementBalance(trans []Transaction) {
 	}
 }
 
-func main() {
-	transactions := []Transaction{
-		{"Deposit", 5000},
-		{"Withdraw", -1500},
-		{"Deposit", 2000},
-		{"Withdraw", -1000},
+ //? Ex 4: Cart Discount Calculator
+/*
+ * Problem Statement:
+- Write a program that takes a list of products (with price and discount%) 
+- and uses a for loop to calculate the price after discount for each item and the total price of the cart.
+
+ * Example
+ Input:
+	products := []Product {
+		{"Shoes", 1200, 10},
+		{"T-shirt", 500, 0}
+	}
+ Expected Output: 
+	Shoes: 1080.00
+	T-Shirt: 500.00
+	Total: 1580.00
+
+ * Condition:
+ - Input:
+   - How many inputs are required?
+		- A single input: a list of products
+   - What is the data type of each input?
+		- products is a slice of Product struct,
+		- []Product contain 3 fields
+			1. Name type string
+			2. Price type float64
+			3. Discount type float64
+   - Are the inputs expected to be positive numbers only?
+		- No, input expected to be a non-empty list of products.
+		- Each product should have a price greater than 0 and a discount between 0 and 100.
+   - Are there any minimum or maximum limits?
+		- price must be greater than 0
+		- discount must be between 0 and 100 (inclusive)
+   - Do the inputs need to be validated or converted before use?
+		- Yes. negative price must be coverted to positive values
+		- discount should be validate to ensure they are between 0 and 100.
+
+ - Core Rule:
+   - What exactly does the problem ask us to do?
+		- print price of each product after using discount.
+		- print total price of all item in cart
+   - Are there any specific rules or formulas?
+		- Use the formula: `price * (1 - discount / 100)`
+		- The discount percentage must be between 0 and 100 (inclusive)
+   - Should the logic involve loops, conditions, or functions?
+		- Use a loop to iterate over each product
+		- Apply the discount calculation per item
+		- Sum the final prices into a total
+		
+   - Is there any domain-specific behavior?
+		- none
+
+ - Output:
+   - What should be displayed as output?
+		Shoes: 1080.00
+		T-Shirt: 500.00
+		Total: 1580.00
+   - Should the output include labels or just values?
+		- include labels
+   - Does the output need to be formatted (e.g., decimal places)?
+		- All prices should be rounded to 2 decimal places
+   - Is the output printed once or repeatedly?
+		- One line per product
+  		- One line for the total
+
+ - Edge Cases:
+   - What happens if inputs are zero or negative?
+		- the inputs cannot be nil or empty list.
+   - What if inputs are missing or invalid?
+		- if list of products are empty or nil warning to user and return.
+		- If any product has a negative price:
+  			- Convert it to a positive number before calculation
+		- If any product has a discount less than 0% or more than 100%:
+  			- Show a warning and skip or terminate the process
+   - Should the program handle extremely large or small values?
+		- Yes, the program should correctly process very high prices or small decimal discounts without rounding errors or overflow.
+
+
+ * Approach 1:
+  1. check if the products is empty or nil, then warning and return
+  2. create and initialize variable call `total` type float64 for keep track total price of products in cart
+  3. loop through each product
+		- check discount if less than 0 or greater than 100 then return.
+		- check price is negative number if negative then convert to positive number
+		- compute price with discount by price * discount / 100 then update new price
+		- print product name and price after use discount
+		- accumulate the `total` by adding each item price with discount
+  4. print total price
+ ✅ Result: Passes all test cases
+
+
+ * Manual Test:
+  Test Case 1:
+  Input: 
+	products := []Product{
+	{"Shoes", 1200, 10},
+	{"T-Shirt", 500, 0},
+	{"Bag", 1500, 5},
+	}
+  Expected Output:
+	Shoes: 1080.00
+	T-Shirt: 500.00
+	Bag: 1425.00
+	Total: 3005.00
+
+  Test Case 2:
+  Input: 
+	products := []Product{
+	{"Notebook", 100, 0},
+	{"Pen", 50, 0},
+	}
+  Expected Output:
+	Notebook: 100.00
+	Pen: 50.00
+	Total: 150.00
+
+
+  Test Case 3:
+  Input: 
+  	products := []Product{
+	{"Promo Code", 1000, 100},
+	{"Free Gift", 500, 100},
+	}
+  Expected Output:
+	Promo Code: 0.00
+	Free Gift: 0.00
+	Total: 0.00
+
+  Test Case 4:
+  Input: 
+  	products := []Product{}
+  Expected Output:
+	No products provided.
+
+  Test Case 5:
+  Input: 
+  	products := []Product{
+	{"Smartphone", 999.99, 12.5},
+	}
+  Expected Output:
+	Smartphone: 874.99
+	Total: 874.99
+
+  Test Case 6:
+  Input: 
+  	products := []Product{
+	{"Bug Item", 200, 150}, // Discount > 100%
+	}
+  Expected Output:
+	Smartphone: 874.99
+	Total: 874.99
+*/
+
+type Product struct {
+	Name string
+	Price float64
+	Discount float64
+}
+
+func cartDiscountCal(products []Product) {
+	if products == nil || len(products) == 0 {
+		fmt.Println("No products provided.")
+		return
+	}
+
+	var total float64
+	for _, product := range products {
+		
+		if product.Discount < 0 || product.Discount > 100  {
+			fmt.Println("discount must be between 0 and 100 percent")
+			return
 		}
-	bankStatementBalance(transactions)
+
+		if product.Price < 0 {
+			product.Price = math.Abs(product.Price)
+		}
+
+		discountedPrice := product.Price - (product.Price * product.Discount / 100)
+		fmt.Printf("%s: %.2f\n", product.Name, discountedPrice)
+		total += discountedPrice
+	}
+	fmt.Printf("Total: %.2f\n", total)
+	}
+
+func main() {
+	products := []Product{
+	{"Shoes", 1200, 10},
+	{"T-Shirt", 500, 0},
+	{"Bag", -1500, 5},
+	}
+	cartDiscountCal(products)
 }
